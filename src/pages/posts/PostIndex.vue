@@ -43,7 +43,7 @@ const getNextPage = async () => {
 
 // 라이프 사이클
 onBeforeMount(postIndexStore.getPostPagination);
-
+onBeforeMount(postIndexStore.clearPostIndex);        // 로그인 등 다른 화면으로 넘어가면 기존의 데이터를 초기화한다.
 </script>
 
 

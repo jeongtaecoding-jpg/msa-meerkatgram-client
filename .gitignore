@@ -14,7 +14,7 @@ dist-ssr
 
 .env*
 public
-sec/assets
+src/assets
 
 # Editor directories and files
 .vscode/*
