@@ -39,6 +39,23 @@ export const useAuthStore = defineStore('authStore', () => {
     }
   }
 
+  const reissue = async () => {   // async와 await는 한 몸이니 무조건 깜빡하지 말기!
+    try {
+      const url = '/api/reissue-token';
+      const res = await myAxios.post(url);
+      const data = res.data.data;
+      accessToken.value = data.accessToken;
+      userInfo.value = data.user;
+      isLoggedIn.value = true;
+
+    } catch(error) {
+      console.error(error.response);   // 토큰에 이상이 생겼을 때 테스트하기위한 콘솔에러(로그인 다시 하면 해결됨!)
+      clearAuthStore();
+      throw error;
+    }
+
+  }
+
   return {
     // State
     isLoggedIn,
@@ -49,5 +66,6 @@ export const useAuthStore = defineStore('authStore', () => {
 
     // Actions
     login,
+    reissue,
   }
 });
