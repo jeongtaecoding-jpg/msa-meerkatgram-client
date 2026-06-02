@@ -2,6 +2,7 @@
 import { onBeforeMount, ref } from 'vue';
 import MyButton from '../../components/buttons/MyButton.vue';
 import { usePostIndexStore } from '../../store/post/usePostIndexStore.js';
+import { useRouter } from 'vue-router';
 
 // ----------------스토어(usePostIndexStore)로 이관 start-----------------------
 
@@ -35,10 +36,15 @@ import { usePostIndexStore } from '../../store/post/usePostIndexStore.js';
 // }
 
 // ----------------스토어(usePostIndexStore)로 이관 end-----------------------
+const router = useRouter();
 const postIndexStore = usePostIndexStore();
 
 const getNextPage = async () => {
   await postIndexStore.getPostPagination(postIndexStore.getNextPageNumber);
+}
+
+const redirectShow = (id) => {
+  router.push(`/posts/${id}`);
 }
 
 // 라이프 사이클
@@ -54,6 +60,7 @@ onBeforeMount(postIndexStore.clearPostIndex);        // 로그인 등 다른 화
     :key="item.id"
     class="card"
     :style="{backgroundImage: `url(${item.image})`}"
+    @click="redirectShow(item.id)"
     ></div>
   </div>
   <MyButton

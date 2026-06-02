@@ -10,7 +10,7 @@ export const useAuthStore = defineStore('authStore', () => {
   const userInfo = ref(null);
 
   // 2. Getter  
-
+  
   // 3. Actions
   const clearAuthStore = () => {
     isLoggedIn.value = false;
@@ -51,9 +51,19 @@ export const useAuthStore = defineStore('authStore', () => {
     } catch(error) {
       console.error(error.response);   // 토큰에 이상이 생겼을 때 테스트하기위한 콘솔에러(로그인 다시 하면 해결됨!)
       clearAuthStore();
-      throw error;
     }
+  }
 
+  const logout = async () => {
+    try {
+      const url = '/api/logout';
+
+      await myAxios.post(url);
+    } catch(error) {
+      console.error(error);
+    } finally {
+      clearAuthStore();
+    }
   }
 
   return {
@@ -67,5 +77,6 @@ export const useAuthStore = defineStore('authStore', () => {
     // Actions
     login,
     reissue,
+    logout,
   }
 });
