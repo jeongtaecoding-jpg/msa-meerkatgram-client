@@ -13,6 +13,8 @@ export const email = (val) => {
 }
 
 
+
+
 export const password = (val) => {
   const regex = /^[0-9a-zA-Z!@#$%^&*()]{8,20}$/;   // 
 
