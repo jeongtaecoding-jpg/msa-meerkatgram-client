@@ -1,11 +1,13 @@
 <script setup>
-import { onBeforeMount } from 'vue';
+import { onBeforeMount, onBeforeUnmount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { usePostShowStore } from '../../store/post/usePostShowStore';
+import { useAuthStore } from '../../store/auth/useAuthStore';
 
 const route = useRoute();
 const router = useRouter();
 const postShowStore = usePostShowStore();
+const authStore = useAuthStore();
 
 onBeforeMount(async () => {
   try {
@@ -16,19 +18,26 @@ onBeforeMount(async () => {
     router.replace('/');
   }
 });
+onBeforeUnmount(postShowStore.clearPostShow);
 </script>
 
+
+<!-- v-if 절만 넣으면 HTML 요소가 사라지니 사라진 요소를 채우기 위해서 v-else로 빈 요소 하나를 넣어 채운다. -->
 <template>
-<div class="container">
+<div class="container" v-if="postShowStore.post">
   <div class="image"  :style="{backgroundImage: `url(${postShowStore.post.image})`}"></div>
   <div class="option-box">
-    <div class="delete-icon"></div>
+    <div 
+    class="delete-icon"
+    v-if="postShowStore.post.userId === authStore.userInfo.id"
+    ></div>
+    <div v-else></div>  
     <div class="like-box">
       <span>1919</span>
       <div class="like-icon"></div>
     </div>
   </div>
-  <p>{{ postShowStore.post.content.replaceAll()}}</p>
+  <p class="content">{{ postShowStore.post.content}}</p>
 
 </div>
 </template>
