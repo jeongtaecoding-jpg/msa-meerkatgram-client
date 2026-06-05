@@ -1,8 +1,9 @@
 <script setup>
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount, onBeforeUnmount, ref } from 'vue';
 import MyButton from '../../components/buttons/MyButton.vue';
 import { usePostIndexStore } from '../../store/post/usePostIndexStore.js';
 import { useRouter } from 'vue-router';
+import { useMyErrorStore } from '../../store/error/useMyErrorStore.js';
 
 // ----------------스토어(usePostIndexStore)로 이관 start-----------------------
 
@@ -38,9 +39,19 @@ import { useRouter } from 'vue-router';
 // ----------------스토어(usePostIndexStore)로 이관 end-----------------------
 const router = useRouter();
 const postIndexStore = usePostIndexStore();
+const myErrorStore = useMyErrorStore();
+
+const getPagination = async (page = 1) => {
+  try {
+    await postIndexStore.getPostPagination(page);
+  } catch (error) {
+    myErrorStore.setErrorInfo(error);
+    router.replace('/error');
+  }
+}
 
 const getNextPage = async () => {
-  await postIndexStore.getPostPagination(postIndexStore.getNextPageNumber);
+  await getPagination(postIndexStore.getNextPageNumber);
 }
 
 const redirectShow = (id) => {
@@ -48,8 +59,8 @@ const redirectShow = (id) => {
 }
 
 // 라이프 사이클
-onBeforeMount(postIndexStore.getPostPagination);
-onBeforeMount(postIndexStore.clearPostIndex);        // 로그인 등 다른 화면으로 넘어가면 기존의 데이터를 초기화한다.
+onBeforeMount(getPagination);
+onBeforeUnmount(postIndexStore.clearPostIndex);        // 로그인 등 다른 화면으로 넘어가면 기존의 데이터를 초기화한다.
 </script>
 
 

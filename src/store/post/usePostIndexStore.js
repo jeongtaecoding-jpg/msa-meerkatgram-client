@@ -39,7 +39,7 @@ export const usePostIndexStore = defineStore('postIndexStore', () => {
 
         } catch(error) {
           console.error(error);
-          useMyErrorStore().setErrorInfo(error);
+          throw error;
         }
       }
     }
