@@ -5,6 +5,7 @@ import MyInput from '../../components/input/MyInput.vue';
 import { useFileStore } from '../../store/file/useFileStore.js';
 import { useAuthStore } from '../../store/auth/useAuthStore.js';
 import { useRouter } from 'vue-router';
+import registrationValidator from '../../util/validator/domain/auth/registrationValidator.js';
 
 const router = useRouter();
 const fileStore = useFileStore();
@@ -21,6 +22,22 @@ const registrationData = reactive({
 });
 
 const handleSubmit = async () => {
+  // 유효성 검사(양식이 틀리면 아래 try문에 못가게 되고 프론트엔드 선에서 걸리기 때문에 devtool network에도 나오는 게 없음)
+  const validationList = [
+    registrationValidator.email(registrationData.email),
+    registrationValidator.password(registrationData.password),
+    registrationValidator.passwordChk(registrationData.password, registrationData.passwordChk),
+    registrationValidator.nick(registrationData.nick),
+    registrationValidator.profile(registrationData.profile),
+  ];
+
+  const errorList = validationList.filter(val => val);
+
+  if(errorList.length > 0) {
+    alert(errorList.join('\n'));  // join : 여러 문자열을 하나로 합치는 것
+    return;
+  }
+
   try {
     await authStore.registration(registrationData);
     alert("회원가입에 성공했습니다.");
