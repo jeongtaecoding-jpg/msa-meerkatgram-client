@@ -6,8 +6,6 @@ export const useFileStore = defineStore('fileStore', () => {
 
   // Getters
 
-
-
   // Actions
   const uploadProfile = async (file) => {
     try {
