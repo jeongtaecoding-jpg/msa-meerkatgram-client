@@ -6,7 +6,7 @@ const authStore = useAuthStore();
 
 const router = useRouter();
 
-const Postcreate = () => {
+const redirectPostcreate = () => {
   router.push(`/posts/create`);
 }
 </script>
@@ -35,7 +35,7 @@ const Postcreate = () => {
           style="background-image: url('/icons/gallery.png');"
       ></div>
       <div class="bg-image-square redirect-icon-posts-create"
-           @click="Postcreate"
+           @click="redirectPostcreate()"
           style="background-image: url('/icons/plus-sign.png');"
       ></div>
       <div class="bg-image-square redirect-icon-posts-info"
@@ -65,7 +65,9 @@ const Postcreate = () => {
   justify-content: space-around;
 }
 
-
+.redirect-icon-posts-create {
+  cursor: pointer;
+}
 
 .redirect-box {
   display: grid;
