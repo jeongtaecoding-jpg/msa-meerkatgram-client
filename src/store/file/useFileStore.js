@@ -7,6 +7,9 @@ export const useFileStore = defineStore('fileStore', () => {
   // Getters
 
   // Actions
+
+  
+  // 이미지 파일을 서버에 올리고 URL을 받아오는 함수
   const uploadProfile = async (file) => {
     try {
       const url = '/api/files/profiles';
