@@ -74,7 +74,7 @@ onBeforeUnmount(postShowStore.clearPostShow);
 .delete-icon {
   width: 40px;
   height: 50px;
-  background-image: url('/icons/trash-can.png');
+  background-image: url('./icons/free-icon-trash-can-bin-12280812.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -83,7 +83,7 @@ onBeforeUnmount(postShowStore.clearPostShow);
 .like-icon {
   width: 40px;
   height: 40px;
-  background-image: url('/icons/heart-fill.png');
+  background-image: url('./icons/heart-fill.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

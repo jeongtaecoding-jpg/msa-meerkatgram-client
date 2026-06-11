@@ -32,14 +32,14 @@ const redirectPostcreate = () => {
     <div class="write-count">posts : {{ authStore.userInfo.countPosts }}</div>
     <div class="redirect-box">
       <div class="bg-image-square redirect-icon-posts-index"
-          style="background-image: url('/icons/gallery.png');"
+          style="background-image: url('./icons/free-icon-gallery-833281.png');"
       ></div>
       <div class="bg-image-square redirect-icon-posts-create"
            @click="redirectPostcreate()"
-          style="background-image: url('/icons/plus-sign.png');"
+          style="background-image: url('./icons/free-icon-plus-sign-3114793.png');"
       ></div>
       <div class="bg-image-square redirect-icon-posts-info"
-          style="background-image: url('/icons/person.png');"
+          style="background-image: url('./icons/free-icon-person-2815428tt.png');"
       ></div>
     </div>
   </div>

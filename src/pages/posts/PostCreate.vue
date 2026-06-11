@@ -19,7 +19,7 @@ const onFileChange = async (event) => {
   
   if (uploadedUrl) {
     // 가장 중요한 부분! 받아온 URL 글자만 postStore의 image 변수에 쏙 넣어둠
-    // 💡 만약 uploadedUrl이 객체라면, 여기서 알맹이만 쏙 빼서 저장!
+    // 만약 uploadedUrl이 객체라면, 여기서 알맹이만 쏙 빼서 저장!
     // (스토어에서 이미 res.data.data.fileUri를 반환했다면 그냥 uploadedUrl만 넣으면 돼)
     poststore.image = typeof uploadedUrl === 'string' ? uploadedUrl : uploadedUrl.data.fileUri;
   }
